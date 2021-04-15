@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require ('mongoose');
+const exphbs  = require('express-handlebars');
 
 const ArtModel = require('./models/art');
 
@@ -13,7 +14,8 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/Art",{
     useCreateIndex: true,
@@ -29,7 +31,7 @@ mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/Art",{
 
 
 app.get('/',(req, res)=>{
-    res.send('art')
+    res.render('home')
 })
 
 app.get('/art',(req,res) => {
