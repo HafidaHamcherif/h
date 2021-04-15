@@ -28,6 +28,9 @@ mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/Art",{
 });
 
 
+app.get('/',(req, res)=>{
+    res.send(art)
+})
 
 app.get('/',(req,res) => {
     console.log('get/art');
